@@ -82,7 +82,7 @@ misrepresented as being the original software.
 
 #if !defined(TFD_API)
     #if defined(TFD_DLL)
-        #if defined(PLI_IMPLEMENTATION)
+        #if defined(TFD_IMPLEMENTATION)
             #define TFD_API  TFD_DLL_EXPORT
         #else
             #define TFD_API  TFD_DLL_IMPORT
