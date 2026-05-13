@@ -62,14 +62,34 @@ misrepresented as being the original software.
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
 
-#ifdef _WIN32
-    #ifdef TFD_EXPORTS
-        #define TFD_API __declspec(dllexport)
+#if defined(TFD_DLL)
+    #if defined(_WIN32)
+        #define TFD_DLL_IMPORT  __declspec(dllimport)
+        #define TFD_DLL_EXPORT  __declspec(dllexport)
+        #define TFD_DLL_PRIVATE static
     #else
-        #define TFD_API __declspec(dllimport)
+        #if defined(__GNUC__) && __GNUC__ >= 4
+            #define TFD_DLL_IMPORT  __attribute__((visibility("default")))
+            #define TFD_DLL_EXPORT  __attribute__((visibility("default")))
+            #define TFD_DLL_PRIVATE __attribute__((visibility("hidden")))
+        #else
+            #define TFD_DLL_IMPORT
+            #define TFD_DLL_EXPORT
+            #define TFD_DLL_PRIVATE static
+        #endif
     #endif
-#else
-    #define TFD_API __attribute__((visibility("default")))
+#endif
+
+#if !defined(TFD_API)
+    #if defined(TFD_DLL)
+        #if defined(TFD_IMPLEMENTATION)
+            #define TFD_API  TFD_DLL_EXPORT
+        #else
+            #define TFD_API  TFD_DLL_IMPORT
+        #endif
+    #else
+        #define TFD_API extern
+    #endif
 #endif
 
 #ifdef	__cplusplus

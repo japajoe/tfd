@@ -106,6 +106,8 @@ misrepresented as being the original software.
  #define TINYFD_SLASH "/"
 #endif /* _WIN32 */
 
+#define TFD_IMPLEMENTATION                                                                                                                                                                     
+#define TFD_DLL  
 #include "tinyfiledialogs.h"
 
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
