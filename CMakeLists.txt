@@ -26,3 +26,5 @@ include_directories(
 )
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE TFD_EXPORTS)
