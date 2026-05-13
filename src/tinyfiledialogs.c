@@ -465,7 +465,7 @@ int tfd_quoteDetected(char const * aString)
 }
 
 
-char const * tinyfd_getGlobalChar(char const * aCharVariableName) /* to be called from C# (you don't need this in C or C++) */
+TFD_API char const * tinyfd_getGlobalChar(char const * aCharVariableName) /* to be called from C# (you don't need this in C or C++) */
 {
 	if (!aCharVariableName || !strlen(aCharVariableName)) return NULL;
 	else if (!strcmp(aCharVariableName, "tinyfd_version")) return tinyfd_version;
@@ -475,7 +475,7 @@ char const * tinyfd_getGlobalChar(char const * aCharVariableName) /* to be calle
 }
 
 
-int tinyfd_getGlobalInt(char const * aIntVariableName) /* to be called from C# (you don't need this in C or C++) */
+TFD_API int tinyfd_getGlobalInt(char const * aIntVariableName) /* to be called from C# (you don't need this in C or C++) */
 {
 	if ( !aIntVariableName || !strlen(aIntVariableName) ) return -1 ;
 	else if ( !strcmp(aIntVariableName, "tinyfd_verbose") ) return tinyfd_verbose ;
@@ -490,7 +490,7 @@ int tinyfd_getGlobalInt(char const * aIntVariableName) /* to be called from C# (
 }
 
 
-int tinyfd_setGlobalInt(char const * aIntVariableName, int aValue) /* to be called from C# (you don't need this in C or C++) */
+TFD_API int tinyfd_setGlobalInt(char const * aIntVariableName, int aValue) /* to be called from C# (you don't need this in C or C++) */
 {
 	if (!aIntVariableName || !strlen(aIntVariableName)) return -1 ;
 	else if (!strcmp(aIntVariableName, "tinyfd_verbose")) { tinyfd_verbose = aValue; return tinyfd_verbose; }
@@ -715,7 +715,7 @@ char * tinyfd_mbcsTo8(char const * aMbcsString)
 }
 
 
-void tinyfd_beep(void)
+TFD_API void tinyfd_beep(void)
 {
 	if (windowsVersion() > 5) Beep(440, 300);
 	else MessageBeep(MB_OK);
@@ -1099,7 +1099,7 @@ static void hiddenConsoleW(wchar_t const * aString, wchar_t const * aDialogTitle
 }
 
 
-int tinyfd_messageBoxW(
+TFD_API int tinyfd_messageBoxW(
 		wchar_t const * aTitle, /* NULL or "" */
 		wchar_t const * aMessage, /* NULL or ""  may contain \n and \t */
 		wchar_t const * aDialogType, /* "ok" "okcancel" "yesno" "yesnocancel" */
@@ -1258,7 +1258,7 @@ Show-BalloonTip");
 
 
 /* return has only meaning for tinyfd_query */
-int tinyfd_notifyPopupW(
+TFD_API int tinyfd_notifyPopupW(
 	wchar_t const* aTitle, /* NULL or L"" */
 	wchar_t const* aMessage, /* NULL or L"" may contain \n \t */
 	wchar_t const* aIconType) /* L"info" L"warning" L"error" */
@@ -1371,7 +1371,7 @@ End Sub\n\
 }
 
 
-wchar_t * tinyfd_inputBoxW(
+TFD_API wchar_t * tinyfd_inputBoxW(
 		wchar_t const * aTitle, /* NULL or L"" */
 		wchar_t const * aMessage, /* NULL or L"" (\n and \t have no effect) */
 		wchar_t const * aDefaultInput) /* L"" , if NULL it's a passwordBox */
@@ -1649,7 +1649,7 @@ name = 'txt_input' value = '' style = 'float:left;width:100%' ><BR>\n\
 }
 
 
-wchar_t * tinyfd_saveFileDialogW(
+TFD_API wchar_t * tinyfd_saveFileDialogW(
 		wchar_t const * aTitle, /* NULL or "" */
 		wchar_t const * aDefaultPathAndOrFile, /* NULL or "" */
 		int aNumOfFilterPatterns, /* 0 */
@@ -1751,7 +1751,7 @@ wchar_t * tinyfd_saveFileDialogW(
 }
 
 
-wchar_t * tinyfd_openFileDialogW(
+TFD_API wchar_t * tinyfd_openFileDialogW(
 		wchar_t const * aTitle, /* NULL or "" */
 		wchar_t const * aDefaultPathAndOrFile, /* NULL or "" */
 		int aNumOfFilterPatterns, /* 0 */
@@ -1948,7 +1948,7 @@ static int __stdcall BrowseCallbackProcW(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM
 	return 0;
 }
 
-wchar_t * tinyfd_selectFolderDialogW(
+TFD_API wchar_t * tinyfd_selectFolderDialogW(
 		wchar_t const * aTitle, /* NULL or "" */
 		wchar_t const * aDefaultPath) /* NULL or "" */
 {
@@ -1999,7 +1999,7 @@ wchar_t * tinyfd_selectFolderDialogW(
 }
 
 
-wchar_t * tinyfd_colorChooserW(
+TFD_API wchar_t * tinyfd_colorChooserW(
 		wchar_t const * aTitle, /* NULL or "" */
 		wchar_t const * aDefaultHexRGB, /* NULL or "#FF0000"*/
 		unsigned char const aDefaultRGB[3], /* { 0 , 255 , 255 } */
@@ -2873,7 +2873,7 @@ static void writeUtf8( char const * aUtf8String )
 }
 
 
-int tinyfd_messageBox(
+TFD_API int tinyfd_messageBox(
 		char const * aTitle, /* NULL or "" */
 		char const * aMessage, /* NULL or ""  may contain \n and \t */
 		char const * aDialogType, /* "ok" "okcancel" "yesno" "yesnocancel" */
@@ -2994,7 +2994,7 @@ int tinyfd_messageBox(
 
 
 /* return has only meaning for tinyfd_query */
-int tinyfd_notifyPopup(
+TFD_API int tinyfd_notifyPopup(
 		char const * aTitle, /* NULL or "" */
 		char const * aMessage , /* NULL or "" may contain \n \t */
 		char const * aIconType ) /* "info" "warning" "error" */
@@ -3014,7 +3014,7 @@ int tinyfd_notifyPopup(
 
 
 /* returns NULL on cancel */
-char * tinyfd_inputBox(
+TFD_API char * tinyfd_inputBox(
 		char const * aTitle , /* NULL or "" */
 		char const * aMessage , /* NULL or "" (\n and \t have no effect) */
 		char const * aDefaultInput ) /* "" , if NULL it's a passwordBox */
@@ -3152,7 +3152,7 @@ char * tinyfd_inputBox(
 }
 
 
-char * tinyfd_saveFileDialog(
+TFD_API char * tinyfd_saveFileDialog(
 		char const * aTitle , /* NULL or "" */
 		char const * aDefaultPathAndOrFile , /* NULL or "" */
 		int aNumOfFilterPatterns , /* 0 */
@@ -3222,7 +3222,7 @@ char * tinyfd_saveFileDialog(
 
 
 /* in case of multiple files, the separator is | */
-char * tinyfd_openFileDialog(
+TFD_API char * tinyfd_openFileDialog(
 	char const * aTitle , /* NULL or "" */
 		char const * aDefaultPathAndOrFile, /* NULL or "" */
 	int aNumOfFilterPatterns , /* 0 */
@@ -3287,7 +3287,7 @@ char * tinyfd_openFileDialog(
 }
 
 
-char * tinyfd_selectFolderDialog(
+TFD_API char * tinyfd_selectFolderDialog(
 		char const * aTitle , /* NULL or "" */
 		char const * aDefaultPath ) /* NULL or "" */
 {
@@ -3337,7 +3337,7 @@ char * tinyfd_selectFolderDialog(
 /* returns NULL on cancel */
 /* returns the hexcolor as a string "#FF0000" */
 /* aoResultRGB also contains the result */
-char * tinyfd_colorChooser(
+TFD_API char * tinyfd_colorChooser(
 		char const * aTitle, /* NULL or "" */
 		char const * aDefaultHexRGB, /* NULL or "" or "#FF0000"*/
 		unsigned char const aDefaultRGB[3], /* { 0 , 255 , 255 } */
@@ -4515,7 +4515,7 @@ void tinyfd_beep(void)
 }
 
 
-int tinyfd_messageBox(
+TFD_API int tinyfd_messageBox(
 		char const * aTitle , /* NULL or "" */
 		char const * aMessage , /* NULL or ""  may contain \n and \t */
 		char const * aDialogType , /* "ok" "okcancel" "yesno" "yesnocancel" */
@@ -5550,7 +5550,7 @@ my \\$notificationsObject = \\$notificationsService->get_object('/org/freedeskto
 
 
 /* return has only meaning for tinyfd_query */
-int tinyfd_notifyPopup(
+TFD_API int tinyfd_notifyPopup(
 		char const * aTitle , /* NULL or "" */
 		char const * aMessage , /* NULL or ""  may contain \n and \t */
 		char const * aIconType ) /* "info" "warning" "error" */
@@ -5805,7 +5805,7 @@ aIconType?aIconType:"", aTitle?aTitle:"", aMessage?aMessage:"" ) ;
 
 
 /* returns NULL on cancel */
-char * tinyfd_inputBox(
+TFD_API char * tinyfd_inputBox(
 		char const * aTitle , /* NULL or "" */
 		char const * aMessage , /* NULL or "" (\n and \t have no effect) */
 		char const * aDefaultInput ) /* "" , if NULL it's a passwordBox */
@@ -6403,7 +6403,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 }
 
 
-char * tinyfd_saveFileDialog(
+TFD_API char * tinyfd_saveFileDialog(
         char const * aTitle , /* NULL or "" */
         char const * aDefaultPathAndOrFile , /* NULL or "" , ends with / to set only a directory */
         int aNumOfFilterPatterns , /* 0 */
@@ -6877,7 +6877,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 
 
 /* in case of multiple files, the separator is | */
-char * tinyfd_openFileDialog(
+TFD_API char * tinyfd_openFileDialog(
     char const * aTitle , /* NULL or "" */
     char const * aDefaultPathAndOrFile , /* NULL or "" , ends with / to set only a directory */
 	int aNumOfFilterPatterns , /* 0 */
@@ -7467,7 +7467,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 }
 
 
-char * tinyfd_selectFolderDialog(
+TFD_API char * tinyfd_selectFolderDialog(
     char const * aTitle , /* "" */
     char const * aDefaultPath ) /* "" */
 {
@@ -7794,7 +7794,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 /* returns NULL on cancel */
 /* returns the hexcolor as a string "#FF0000" */
 /* aoResultRGB also contains the result */
-char * tinyfd_colorChooser(
+TFD_API char * tinyfd_colorChooser(
 		char const * aTitle , /* NULL or "" */
 		char const * aDefaultHexRGB , /* NULL or "#FF0000"*/
 		unsigned char const aDefaultRGB[3] , /* { 0 , 255 , 255 } */
@@ -8139,7 +8139,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 
 /* Modified prototypes for R */
 
-void tfd_messageBox(
+TFD_API void tfd_messageBox(
 	char const * aTitle ,
 	char const * aMessage ,
 	char const * aDialogType ,
@@ -8150,7 +8150,7 @@ void tfd_messageBox(
 }
 
 
-void tfd_inputBox(
+TFD_API void tfd_inputBox(
 	char const * aTitle ,
 	char const * aMessage ,
 	char * * aiDefaultInput )
@@ -8164,7 +8164,7 @@ void tfd_inputBox(
 }
 
 
-void tfd_saveFileDialog(
+TFD_API void tfd_saveFileDialog(
 	char const * aTitle ,
 	char * * aiDefaultPathAndFile ,
 	int const * aNumOfFilterPatterns ,
@@ -8182,7 +8182,7 @@ void tfd_saveFileDialog(
 }
 
 
-void tfd_openFileDialog(
+TFD_API void tfd_openFileDialog(
 	char const * aTitle ,
 	char * * aiDefaultPathAndFile ,
 	int const * aNumOfFilterPatterns ,
@@ -8202,7 +8202,7 @@ void tfd_openFileDialog(
 }
 
 
-void tfd_selectFolderDialog(
+TFD_API void tfd_selectFolderDialog(
 	char const * aTitle ,
 	char * * aiDefaultPath )
 {
@@ -8213,7 +8213,7 @@ void tfd_selectFolderDialog(
 }
 
 
-void tfd_colorChooser(
+TFD_API void tfd_colorChooser(
 	char const * aTitle ,
 	char * * aiDefaultHexRGB )
 {
