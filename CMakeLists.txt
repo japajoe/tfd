@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5...3.28)
 
 project(tfd)
 
+option(BUILD_SHARED_LIBS "Build as shared library" ON)
+
 set(CMAKE_C_STANDARD 11)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -23,6 +25,11 @@ file(GLOB_RECURSE SOURCES
 
 include_directories(
     "${PROJECT_SOURCE_DIR}/include"
+    "${PROJECT_SOURCE_DIR}/include/tinyfiledialogs"
 )
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+if(BUILD_SHARED_LIBS)
+    add_library(${PROJECT_NAME} SHARED ${SOURCES})
+else()
+    add_library(${PROJECT_NAME} STATIC ${SOURCES})
+endif()
